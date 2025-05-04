@@ -12,9 +12,9 @@
 
 
 
+# Documentation
 
-
-# input
+## input
 
 ### input.down()
 
@@ -43,7 +43,7 @@ print(input.released())
 -- print up or down or left or right or z or x
 ```
 
-# draw
+## draw
 
 ### colors palette
 
@@ -107,7 +107,7 @@ Draw a circle
 draw.rect(30,30,10) 
 ```
 
-# app
+## app
 
 ### app.dt()
 
@@ -139,7 +139,7 @@ reset the cart and go back to selection screen
 restart the current cart
 
 
-# Sound 
+## Sound 
 
 ### sound.play(sound:String)
 
@@ -148,7 +148,7 @@ play a built-in sound by name
 the values can be:
 blip click click hit powerup jump pickup laser random synth
 
-# Timer
+## Timer
 
 ### timer.delay(fn, delay)
 
@@ -212,7 +212,7 @@ group:delay(function() print("hello world") end, 4)
 
 A good example of where groups are useful is for games where you may have a set of events which effect objects in the game world and which you want to pause when the game is paused.  A group's events can be paused by simply neglecting to call its `update()` method; when a group is destroyed its events are also destroyed.
 
-# object
+## object
 
 The object module offer an interface for OOP programming
 
@@ -303,9 +303,9 @@ function Point:__tostring()
 end
 ```
 
-# Tween
+## Tween
 
-## Tween creation
+### Tween creation
 
 ``` lua
 local t = tween.new(duration, subject, target, [easing])
@@ -321,7 +321,7 @@ Creates a new tween.
 
 This function only creates and returns the tween. It must be captured in a variable and updated via `t:update(dt)` in order for the changes to take place.
 
-## Tween methods
+### Tween methods
 
 ``` lua
 local complete = t:update()
@@ -360,7 +360,7 @@ Resets the internal clock of the tween back to 0, resetting `subject`.
 
 This method is equivalent to `t:set(0)`.
 
-# Easing functions
+### Easing functions
 
 Easing functions are functions that express how slow/fast the interpolation happens in tween.
 
@@ -409,7 +409,7 @@ But since `'linear'` is the default, you can also do this:
 local t3 = tween.new(10, subject, {x=10})
 ```
 
-## Custom easing functions
+### Custom easing functions
 
 You are not limited to tween's easing functions; if you pass a function parameter in the easing, it will be used.
 
@@ -435,7 +435,7 @@ local labelTween = tween.new(4, label, {y=300}, cubicbezier(.35, .97, .58, .61))
 ```
 
 
-# Credits
+## Credits
 
 Engine written in [BlitzMax NG](https://blitzmax.org/).  
 Carts written in [Lua 5.1](https://www.lua.org/).  
