@@ -37,3 +37,22 @@ Type TdrawApi
 
 End Type
 '-----------------------------------------------------------------------------------------------------------
+
+
+Function getPalette:RColor(n:Int)
+	if n = 0 Then
+		return new RColor(224, 248, 208,255)
+	EndIf
+	if n = 1 Then
+        return new RColor(136, 192, 112,255)
+    EndIf
+	if n = 2 Then
+        return new RColor(52, 104, 86,255)
+    EndIf
+    if n = 3 Then
+        return new RColor(8, 24, 32,255)
+    EndIf
+
+End Function
+
+

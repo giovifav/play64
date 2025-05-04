@@ -11,8 +11,8 @@
 // FILE : "assets/powerUp.wav"	242ac1f64fe951ba
 // FILE : "assets/random.wav"	591e4d2549371dd0
 // FILE : "assets/synth.wav"	1ef8de949c02a9df
-// FILE : "src/lualibs.lua"	706c2738690acd0b
-// FILE : "src/titlescreen.lua"	e5aa2a21c0614ff1
+// FILE : "src/lualibs.lua"	fc3b50adb122619f
+// FILE : "src/titlescreen.lua"	9f64d1bc1efdb9fa
 // ----
 INCBIN(_bb_main_1, "C:/Users/jo/Desktop/matrice.bmx/src/assets/blipSelect.wav");
 INCBIN(_bb_main_2, "C:/Users/jo/Desktop/matrice.bmx/src/assets/click.wav");

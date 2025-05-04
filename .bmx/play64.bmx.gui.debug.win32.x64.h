@@ -7,12 +7,14 @@
 #include <brl.mod/standardio.mod/.bmx/standardio.bmx.debug.win32.x64.h>
 #include <brl.mod/basic.mod/.bmx/basic.bmx.debug.win32.x64.h>
 #include <brl.mod/maxlua.mod/.bmx/maxlua.bmx.debug.win32.x64.h>
+#include <text.mod/ini.mod/.bmx/ini.bmx.debug.win32.x64.h>
 int _bb_main();
-struct _m_play64_ScrollableList_obj;
 struct _m_play64_TdrawApi_obj;
 struct _m_play64_TappApi_obj;
 struct _m_play64_TinputApi_obj;
 struct _m_play64_TSoundApi_obj;
+struct _m_play64_Tconfig_obj;
+struct _m_play64_TgameList_obj;
 extern struct brl_audio_TSound_obj* _m_play64_BLIP_SOUND;
 extern struct brl_audio_TSound_obj* _m_play64_CLICK_SOUND;
 extern struct brl_audio_TSound_obj* _m_play64_EXPLOSION_SOUND;
@@ -23,47 +25,7 @@ extern struct brl_audio_TSound_obj* _m_play64_PICKUP_SOUND;
 extern struct brl_audio_TSound_obj* _m_play64_POWERUP_SOUND;
 extern struct brl_audio_TSound_obj* _m_play64_RANDOM_SOUND;
 extern struct brl_audio_TSound_obj* _m_play64_SYNTH_SOUND;
-extern BBINT _m_play64_windowWidth;
-extern BBINT _m_play64_windowHeight;
 extern BBSTRING _m_play64_cartName;
-void __m_play64_ScrollableList_New(struct _m_play64_ScrollableList_obj* o);
-typedef void (*_m_play64_ScrollableList_Update_m)(struct _m_play64_ScrollableList_obj*);
-void __m_play64_ScrollableList_Update(struct _m_play64_ScrollableList_obj*);
-typedef void (*_m_play64_ScrollableList_Draw_m)(struct _m_play64_ScrollableList_obj*);
-void __m_play64_ScrollableList_Draw(struct _m_play64_ScrollableList_obj*);
-struct BBClass__m_play64_ScrollableList {
-	BBClass*  super;
-	void      (*free)( BBObject *o );
-	BBDebugScope* debug_scope;
-	unsigned int instance_size;
-	void      (*ctor)( BBOBJECT o );
-	void      (*dtor)( BBOBJECT o );
-	BBSTRING  (*ToString)( BBOBJECT x );
-	int       (*Compare)( BBOBJECT x,BBOBJECT y );
-	BBOBJECT  (*SendMessage)( BBOBJECT o,BBOBJECT m,BBOBJECT s );
-	BBINTERFACETABLE itable;
-	void*     extra;
-	unsigned int obj_size;
-	unsigned int instance_count;
-	unsigned int fields_offset;
-	_m_play64_ScrollableList_Update_m m_Update;
-	_m_play64_ScrollableList_Draw_m m_Draw;
-};
-
-struct _m_play64_ScrollableList_obj {
-	struct BBClass__m_play64_ScrollableList* clas;
-	BBINT __m_play64_scrollablelist_itemheight;
-	BBFLOAT __m_play64_scrollablelist_scrollspeed;
-	BBFLOAT __m_play64_scrollablelist_scrollposition;
-	BBINT __m_play64_scrollablelist_maxitems;
-	BBINT __m_play64_scrollablelist_listheight;
-	BBARRAY __m_play64_scrollablelist_items;
-	BBINT __m_play64_scrollablelist_selectedindex;
-	BBINT __m_play64_scrollablelist_x;
-	BBINT __m_play64_scrollablelist_y;
-	BBINT __m_play64_scrollablelist_width;
-};
-extern struct BBClass__m_play64_ScrollableList _m_play64_ScrollableList;
 extern struct brl_maxlua_TLuaObject_obj* _m_play64_instance;
 extern struct brl_maxlua_TLuaClass_obj* _m_play64_class;
 void __m_play64_TdrawApi_New(struct _m_play64_TdrawApi_obj* o);
@@ -214,7 +176,87 @@ struct _m_play64_TSoundApi_obj {
 };
 extern struct BBClass__m_play64_TSoundApi _m_play64_TSoundApi;
 extern struct _m_play64_TSoundApi_obj* _m_play64_soundApi;
+void __m_play64_Tconfig_New(struct _m_play64_Tconfig_obj* o);
+typedef void (*_m_play64_Tconfig_save_m)(struct _m_play64_Tconfig_obj*);
+void __m_play64_Tconfig_save(struct _m_play64_Tconfig_obj*);
+typedef void (*_m_play64_Tconfig_close_m)(struct _m_play64_Tconfig_obj*);
+void __m_play64_Tconfig_close(struct _m_play64_Tconfig_obj*);
+struct BBClass__m_play64_Tconfig {
+	BBClass*  super;
+	void      (*free)( BBObject *o );
+	BBDebugScope* debug_scope;
+	unsigned int instance_size;
+	void      (*ctor)( BBOBJECT o );
+	void      (*dtor)( BBOBJECT o );
+	BBSTRING  (*ToString)( BBOBJECT x );
+	int       (*Compare)( BBOBJECT x,BBOBJECT y );
+	BBOBJECT  (*SendMessage)( BBOBJECT o,BBOBJECT m,BBOBJECT s );
+	BBINTERFACETABLE itable;
+	void*     extra;
+	unsigned int obj_size;
+	unsigned int instance_count;
+	unsigned int fields_offset;
+	_m_play64_Tconfig_save_m m_save;
+	_m_play64_Tconfig_close_m m_close;
+};
+
+struct _m_play64_Tconfig_obj {
+	struct BBClass__m_play64_Tconfig* clas;
+	struct text_ini_TIni_obj* __m_play64_tconfig_ini;
+	struct text_ini_TIniSection_obj* __m_play64_tconfig_settings;
+	struct text_ini_TIniSection_obj* __m_play64_tconfig_controls;
+	struct text_ini_TIniProperty_obj* __m_play64_tconfig_width;
+	struct text_ini_TIniProperty_obj* __m_play64_tconfig_height;
+	struct text_ini_TIniProperty_obj* __m_play64_tconfig_fullscreen;
+	struct text_ini_TIniProperty_obj* __m_play64_tconfig_intro;
+	struct text_ini_TIniProperty_obj* __m_play64_tconfig_game;
+	struct text_ini_TIniProperty_obj* __m_play64_tconfig_title;
+};
+extern struct BBClass__m_play64_Tconfig _m_play64_Tconfig;
+extern struct _m_play64_Tconfig_obj* _m_play64_CONF;
+extern BBINT _m_play64_windowWidth;
+extern BBINT _m_play64_windowHeight;
+extern BBSTRING _m_play64_windowTitle;
+void __m_play64_TgameList_New(struct _m_play64_TgameList_obj* o);
+typedef void (*_m_play64_TgameList_Update_m)(struct _m_play64_TgameList_obj*);
+void __m_play64_TgameList_Update(struct _m_play64_TgameList_obj*);
+typedef void (*_m_play64_TgameList_Draw_m)(struct _m_play64_TgameList_obj*);
+void __m_play64_TgameList_Draw(struct _m_play64_TgameList_obj*);
+struct BBClass__m_play64_TgameList {
+	BBClass*  super;
+	void      (*free)( BBObject *o );
+	BBDebugScope* debug_scope;
+	unsigned int instance_size;
+	void      (*ctor)( BBOBJECT o );
+	void      (*dtor)( BBOBJECT o );
+	BBSTRING  (*ToString)( BBOBJECT x );
+	int       (*Compare)( BBOBJECT x,BBOBJECT y );
+	BBOBJECT  (*SendMessage)( BBOBJECT o,BBOBJECT m,BBOBJECT s );
+	BBINTERFACETABLE itable;
+	void*     extra;
+	unsigned int obj_size;
+	unsigned int instance_count;
+	unsigned int fields_offset;
+	_m_play64_TgameList_Update_m m_Update;
+	_m_play64_TgameList_Draw_m m_Draw;
+};
+
+struct _m_play64_TgameList_obj {
+	struct BBClass__m_play64_TgameList* clas;
+	BBINT __m_play64_tgamelist_itemheight;
+	BBFLOAT __m_play64_tgamelist_scrollspeed;
+	BBFLOAT __m_play64_tgamelist_scrollposition;
+	BBINT __m_play64_tgamelist_maxitems;
+	BBINT __m_play64_tgamelist_listheight;
+	BBARRAY __m_play64_tgamelist_items;
+	BBINT __m_play64_tgamelist_selectedindex;
+	BBINT __m_play64_tgamelist_x;
+	BBINT __m_play64_tgamelist_y;
+	BBINT __m_play64_tgamelist_width;
+};
+extern struct BBClass__m_play64_TgameList _m_play64_TgameList;
 BBSTRING _m_play64_LoadFileAsString(BBOBJECT bbt_url);
+void _m_play64_LoadLuaInc(BBSTRING bbt_file);
 void _m_play64_LoadLua(BBSTRING bbt_file);
 struct ray_lib_common_RColor _m_play64_getPalette(BBINT bbt_n);
 void _m_play64_RunLua();

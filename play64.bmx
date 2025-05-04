@@ -5,53 +5,44 @@ Import BRL.StandardIO
 Import BRL.Basic
 Import brl.maxlua
 Import brl.filesystem
+Import Text.ini
 Include "src/drawApi.bmx"
 Include "src/inputApi.bmx"
 Include "src/appApi.bmx"
-Include "src/Utils.bmx"
 Include "src/soundApi.bmx"	
-Include "src/list.bmx"
+Include "src/Tlist.bmx"
+Include "src/luaLoad.bmx"
+Include "src/Tconfig.bmx"
 Incbin "src/lualibs.lua"
 Incbin "src/titlescreen.lua"
 
+Global CONF:Tconfig = New Tconfig()
 'configurazione di base
 Global windowWidth:Int = 800
 Global windowHeight:Int = 450
-Const windowTitle:String ="window"
-Const targetFps:Int = 30
+Global windowTitle:String = CONF.title.GetValue()
 Const gameScreenWidth:Int = 64
 Const gameScreenHeight:Int = 64
-Global cartName:String = "titlescreen"
-Local list:ScrollableList = New ScrollableList()
+Local list:TgameList = New TgameList()
 
 'creazione della finestra 
 SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT)
 InitWindow(windowWidth, windowHeight, windowTitle)
 
-Global instance:TLuaObject
-Global class:TLuaClass
-Global drawApi:TdrawApi=New TdrawApi
-LuaRegisterObject(drawApi,"draw")
-Global appApi:TappApi=New TappApi
-LuaRegisterObject(appApi,"app")
-Global inputApi:TinputApi=New TinputApi
-LuaRegisterObject(inputApi,"input")
-Global soundApi:TsoundApi = New TsoundApi
-LuaRegisterObject( soundApi, "sound")
-
 SetWindowMinSize(320, 180)
-SetTargetFPS(targetFps)               ' Set our game to run at 30 frames-per-second
+SetTargetFPS(30)               ' Set our game to run at 30 frames-per-second
 
 ' Render texture initialization, used to hold the rendering result so we can easily resize it
 Local target:RRenderTexture2D = LoadRenderTexture(gameScreenWidth, gameScreenHeight)
 SetTextureFilter(target.texture, 0)  ' Texture scale filter to use
 '--------------------------------------------------------------------------------------
+if CONF.intro.GetValue() = String("True") Then
+	LoadLuaInc("titlescreen") ' Load the Lua file and run the init function
+EndIf
 
-'carica lo screen di intro scritto in lua 
-Local source:String =  LoadFileAsString("incbin::src/lualibs.lua") +  LoadFileAsString(  "incbin::src/titlescreen.lua" )
-class:TLuaClass=TLuaClass.Create( source )
-instance:TLuaObject=TLuaObject.Create( class,Null )
-instance.Invoke("init",Null)'esegui funzione init del programma in lua' Main game loop
+If FileType("carts/" + String(CONF.game.GetValue()) + ".lua") = 1 Then
+	LoadLua(CONF.game.GetValue()) ' Load the Lua file and run the init function
+EndIf
 
 
 While Not WindowShouldClose()  
@@ -63,22 +54,18 @@ While Not WindowShouldClose()
 	'----------------------------------------------------------------------------------
 	' Compute required framebuffer scaling
 	Local Scale:Float = Min(GetScreenWidth()/Float(gameScreenWidth), GetScreenHeight()/Float(gameScreenHeight))
-	If cartName = "" Then
-		list.Update()
-	EndIf
-
 	' Draw
 	'----------------------------------------------------------------------------------
 	' Draw everything in the render texture, note this will not be rendered on screen, yet
 	BeginTextureMode(target)
 	ClearBackground(drawApi.bg)
 	If cartName = "" Then
+		list.Update()
 		list.Draw()
 	Else
 		RunLua()
 		If IsKeyPressed( KEY_R ) Then
 			cartName = ""
-			drawApi.bg = getPalette(3)
 			SetWindowTitle(windowTitle)
 		EndIf
 	EndIf
@@ -97,6 +84,7 @@ Wend
 
 ' De-Initialization
 '--------------------------------------------------------------------------------------
+CONF.close()
 UnloadRenderTexture(target)    ' Unload render texture
 CloseWindow()                  ' Close window and OpenGL context
 '--------------------------------------------------------------------------------------

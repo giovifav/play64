@@ -599,9 +599,31 @@ function tween.new(duration, subject, target, easing)
 end
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --------------------------------------------------
 
 function update()
     timer.update()
     run()
 end
+
+
+

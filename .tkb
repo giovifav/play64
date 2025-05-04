@@ -10,6 +10,16 @@
       "id": "SnfxRym6NYi9eht1AFl91",
       "description": "joystick support\n",
       "columnId": "column-todo"
+    },
+    "HmzVA3x1uComRzxdoWw49": {
+      "id": "HmzVA3x1uComRzxdoWw49",
+      "description": "setting reading and saving",
+      "columnId": "column-todo"
+    },
+    "MTiLDuT6bN8J6N4itM1GT": {
+      "id": "MTiLDuT6bN8J6N4itM1GT",
+      "description": "per game score system save",
+      "columnId": "column-todo"
     }
   },
   "columns": [
@@ -18,7 +28,9 @@
       "title": "To do",
       "tasksIds": [
         "a8Ux0Z9Nq-EXKoJ21asly",
-        "SnfxRym6NYi9eht1AFl91"
+        "SnfxRym6NYi9eht1AFl91",
+        "HmzVA3x1uComRzxdoWw49",
+        "MTiLDuT6bN8J6N4itM1GT"
       ]
     },
     {

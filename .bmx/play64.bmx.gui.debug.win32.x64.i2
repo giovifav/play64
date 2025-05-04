@@ -5,25 +5,9 @@ import audio.audiominiaudio
 import brl.standardio
 import brl.basic
 import brl.maxlua
-windowTitle$=$"window"
-targetFps%=30
+import text.ini
 gameScreenWidth%=64
 gameScreenHeight%=64
-ScrollableList^Object{
-.itemHeight%&
-.scrollSpeed#&
-.scrollPosition#&
-.maxItems%&
-.listHeight%&
-.items$&[]&
-.selectedIndex%&
-.x%&
-.y%&
-.width%&
--New()="_m_play64_ScrollableList_New"
--Update()="_m_play64_ScrollableList_Update"
--Draw()="_m_play64_ScrollableList_Draw"
-}="_m_play64_ScrollableList"
 TdrawApi^Object{
 bg:RColor&=mem:p("_m_play64_TdrawApi_bg")
 mainColor:RColor&=mem:p("_m_play64_TdrawApi_mainColor")
@@ -56,7 +40,37 @@ TSoundApi^Object{
 -New()="__m_play64_TSoundApi_New"
 -play(sound$)="_m_play64_TSoundApi_play_S"
 }="_m_play64_TSoundApi"
+Tconfig^Object{
+.ini:TIni&`
+.settings:TIniSection&`
+.controls:TIniSection&`
+.width:TIniProperty&
+.height:TIniProperty&
+.fullscreen:TIniProperty&
+.intro:TIniProperty&
+.game:TIniProperty&
+.title:TIniProperty&
+-New()="_m_play64_Tconfig_New"
+-save()="_m_play64_Tconfig_save"
+-close()="_m_play64_Tconfig_close"
+}="_m_play64_Tconfig"
+TgameList^Object{
+.itemHeight%&
+.scrollSpeed#&
+.scrollPosition#&
+.maxItems%&
+.listHeight%&
+.items$&[]&
+.selectedIndex%&
+.x%&
+.y%&
+.width%&
+-New()="_m_play64_TgameList_New"
+-Update()="_m_play64_TgameList_Update"
+-Draw()="_m_play64_TgameList_Draw"
+}="_m_play64_TgameList"
 LoadFileAsString$(url:Object)="_m_play64_LoadFileAsString"
+LoadLuaInc(file$)="_m_play64_LoadLuaInc"
 LoadLua(file$)="_m_play64_LoadLua"
 getPalette:RColor(n%)="_m_play64_getPalette"
 RunLua()="_m_play64_RunLua"
@@ -70,8 +84,6 @@ PICKUP_SOUND:TSound&=mem:p("_m_play64_PICKUP_SOUND")
 POWERUP_SOUND:TSound&=mem:p("_m_play64_POWERUP_SOUND")
 RANDOM_SOUND:TSound&=mem:p("_m_play64_RANDOM_SOUND")
 SYNTH_SOUND:TSound&=mem:p("_m_play64_SYNTH_SOUND")
-windowWidth%&=mem:p("_m_play64_windowWidth")
-windowHeight%&=mem:p("_m_play64_windowHeight")
 cartName$&=mem:p("_m_play64_cartName")
 instance:TLuaObject&=mem:p("_m_play64_instance")
 class:TLuaClass&=mem:p("_m_play64_class")
@@ -79,3 +91,7 @@ drawApi:TdrawApi&=mem:p("_m_play64_drawApi")
 appApi:TappApi&=mem:p("_m_play64_appApi")
 inputApi:TinputApi&=mem:p("_m_play64_inputApi")
 soundApi:TSoundApi&=mem:p("_m_play64_soundApi")
+CONF:Tconfig&=mem:p("_m_play64_CONF")
+windowWidth%&=mem:p("_m_play64_windowWidth")
+windowHeight%&=mem:p("_m_play64_windowHeight")
+windowTitle$&=mem:p("_m_play64_windowTitle")

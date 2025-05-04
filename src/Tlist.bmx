@@ -1,6 +1,6 @@
 
 ' List Type
-Type ScrollableList
+Type TgameList
     Field itemHeight:Int
     Field scrollSpeed:Float
     Field scrollPosition:Float
@@ -61,6 +61,7 @@ Type ScrollableList
 
     ' Draw the list
     Method Draw()
+        ClearBackground(getPalette(3)) ' Clear background with a color from the palette
         For Local i:Int = 0 To maxItems - 1
             Local yPosition:Int = i * itemHeight - scrollPosition + y
             If yPosition >= y And yPosition < y + listHeight Then

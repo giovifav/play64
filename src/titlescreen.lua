@@ -3,6 +3,7 @@ title ={text = "play64", x = 3, y = -10, font = 10}
 
 function init()
     app.title("Play64")
+    sound.play("random")
 
     t = tween.new(2, title, {x = 3, y = 20})
     draw.background(0)
@@ -20,8 +21,9 @@ function run()
     draw.text("Console", title.x, title.y + 24, title.font)
 
     if complete then
-        sound.play("coin")
         timer.delay(function()
+            sound.play("pickup")
+
             app.reset()
             draw.background(3)
         end, 1)
