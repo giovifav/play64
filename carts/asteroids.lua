@@ -169,6 +169,8 @@ function Game:update()
     end
 end
 
+
+
 function Game:draw()
     draw.background(0)
     draw.color(1)

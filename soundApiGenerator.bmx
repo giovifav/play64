@@ -16,7 +16,7 @@ Function GenerateSoundApiFile(directory:String, outputFile:String)
 		Local t:String = NextFile( dir )
 		If t="" Exit
 		If t="." Or t=".." Continue
-		WriteLine(output, "'" + StripExt(t))
+		WriteLine(output, "'" + Lower(StripExt(t)))
 	Forever
 
 	dir:Byte Ptr = ReadDir(directory)
@@ -25,7 +25,7 @@ Function GenerateSoundApiFile(directory:String, outputFile:String)
 		If t="" Exit
 		If t="." Or t=".." Continue
 		WriteLine(output, "Incbin ~q"+ "assets/" + t + "~q")
-		WriteLine(output, "Global sounds_" + StripExt(t) +":Tsound = LoadSound(~qincbin::assets/"+t+"~q)")
+		WriteLine(output, "Global sounds_" + Lower(StripExt(t)) +":Tsound = LoadSound(~qincbin::assets/"+t+"~q)")
 	Forever
 	WriteLine( output, "Type TSoundApi" )
 	WriteLine ( output, "Method play(sound:String)" )
@@ -34,7 +34,7 @@ Function GenerateSoundApiFile(directory:String, outputFile:String)
 		Local t:String = NextFile( dir )
 		If t="" Exit
 		If t="." Or t=".." Continue
-		WriteLine(output, "If sound = ~q" + StripExt(t) +  "~q  PlaySound(sounds_" + StripExt(t) +")")
+		WriteLine(output, "If sound = ~q" + StripExt(t) +  "~q  PlaySound(sounds_" + Lower(StripExt(t)) +")")
 	Forever
 	WriteLine( output,	"EndMethod EndType" )
     CloseStream(output)
