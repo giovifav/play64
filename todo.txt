@@ -5,7 +5,6 @@ camera
 sistemare inputApi per accettare piu keybinings
 save system chiave valore per ogni gioco
 
-
 idee:
 importare immagini da assets gratuiti 1-bit 8x8  come sprite pre definte
 
