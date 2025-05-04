@@ -67,9 +67,9 @@ Type TgameList
             If yPosition >= y And yPosition < y + listHeight Then
                 ' Highlight the selected item
                 If i = selectedIndex Then
-                    DrawRectangle(x , yPosition, width , itemHeight, getPalette(2))
+                    DrawRectangle(x , yPosition, width , itemHeight-1, getPalette(2))
                 EndIf
-                DrawText(items[i], x + 3, yPosition, 2, getPalette(0))
+                DrawText(items[i], x + 2, yPosition, 2, getPalette(0))
             EndIf
         Next
     End Method
