@@ -111,7 +111,7 @@ function Game:update()
         -- Check collision with food
         local head = self.snake.body[1]
         if head.x == self.food.x and head.y == self.food.y then
-            sound.play("pickup")
+            sound.play("Powerup")
             self.food:relocate()
             self.score = self.score + 1
             draw.background(1)
@@ -125,7 +125,7 @@ function Game:update()
         -- Check collision with walls or itself
         if self.snake:checkCollision() then
             self.gameOver = true
-            sound.play("explosion")
+            sound.play("Explosion")
             draw.background(1)
             timer.delay(function()
                 draw.background(0)

@@ -6,6 +6,7 @@ Import BRL.Basic
 Import brl.maxlua
 Import brl.filesystem
 Import Text.ini
+Import brl.map
 Include "src/drawApi.bmx"
 Include "src/inputApi.bmx"
 Include "src/appApi.bmx"

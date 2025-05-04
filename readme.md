@@ -442,4 +442,5 @@ Carts written in [Lua 5.1](https://www.lua.org/).
 The graphic library is [Raylib](https://www.raylib.com/).  
 [Classic by rxi](https://github.com/rxi/classic) for lua OOP.  
 [Tween by kikito](https://github.com/kikito/tween.lua).  
-[Tick by rxi](https://github.com/rxi/tick).  
+[Tick by rxi](https://github.com/rxi/tick)
+Sound Effects by Coffee 'Valen' Bat
