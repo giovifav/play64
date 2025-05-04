@@ -16,6 +16,8 @@ function Paddle:new(x, y)
     self.score = 0
 end
 
+
+
 function Paddle:update()
     self.y = math.max(0, math.min(WINDOW_HEIGHT - PADDLE_HEIGHT, self.y + self.dy))
 end
