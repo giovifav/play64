@@ -10,6 +10,8 @@ Global inputApi:TinputApi=New TinputApi
 LuaRegisterObject(inputApi,"input")
 Global soundApi:TsoundApi = New TsoundApi
 LuaRegisterObject( soundApi, "sound")
+Global spriteApi:TspriteApi = New TspriteApi
+LuaRegisterObject( spriteApi, "sprite")
 
 
 

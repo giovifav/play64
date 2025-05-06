@@ -11,6 +11,7 @@ Include "src/drawApi.bmx"
 Include "src/inputApi.bmx"
 Include "src/appApi.bmx"
 Include "src/soundApi.bmx"	
+Include "src/spriteApi.bmx"
 Include "src/Tlist.bmx"
 Include "src/luaLoad.bmx"
 Include "src/Tconfig.bmx"
@@ -66,8 +67,12 @@ While Not WindowShouldClose()
 	Else
 		RunLua()
 		If IsKeyPressed( KEY_R ) Then
-			cartName = ""
-			SetWindowTitle(windowTitle)
+			If FileType("carts/" + String(CONF.game.GetValue()) + ".lua") = 1 Then
+				LoadLua(CONF.game.GetValue()) ' Load the Lua file and run the init function
+			Else
+				cartName = ""
+				SetWindowTitle(windowTitle)
+			EndIf
 		EndIf
 	EndIf
 	EndTextureMode()
