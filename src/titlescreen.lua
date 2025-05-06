@@ -3,7 +3,7 @@ title ={text = "play64", x = 3, y = -10, font = 10}
 
 function init()
     app.title("Play64")
-    sound.play("Thunder")
+    sound.play("thunder")
 
     t = tween.new(2, title, {x = 3, y = 20})
     draw.background(0)
@@ -22,7 +22,7 @@ function run()
 
     if complete then
         timer.delay(function()
-            sound.play("Menu_In")
+            sound.play("menu_in")
 
             app.reset()
             draw.background(3)

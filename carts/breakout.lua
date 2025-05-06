@@ -1,5 +1,5 @@
 
-Paddle = Class:extend()
+Paddle = object:extend()
 
 function Paddle:new(x, y)
     self.x = x
@@ -23,7 +23,7 @@ function Paddle:draw()
     draw.rect(self.x, self.y, self.width, self.height)
 end
 
-Ball = Class:extend()
+Ball = object:extend()
 
 function Ball:new(x, y)
     self.x = x
@@ -64,7 +64,7 @@ function Ball:collides(obj)
            self.y + self.height > obj.y
 end
 
-Brick = Class:extend()
+Brick = object:extend()
 
 function Brick:new(x, y)
     self.x = x

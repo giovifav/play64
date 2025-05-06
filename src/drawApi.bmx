@@ -26,12 +26,20 @@ Type TdrawApi
 		DrawRectangle( x, y, width, height, mainColor)
 	EndMethod
 
+	Method triangle(x1:Int, y1:Int, x2:Int, y2:Int, x3:Int, y3:Int)
+		DrawTriangle( new RVector2(x1, y1), new RVector2(x2, y2), new RVector2(x3, y3), mainColor)
+	EndMethod
+
 	Method text(text:String, x:Int, y:Int, size:Int)
 		DrawText( text,x,y, size, mainColor)
 	EndMethod
 
 	Method circle(x:Int, y:Int, radius:Int)
 		DrawCircle( x, y, radius, mainColor)
+	EndMethod
+
+	Method sprite(title:String, x:Int, y:Int)
+		spritesApi.draw(title, x, y)
 	EndMethod
 
 
@@ -41,16 +49,16 @@ End Type
 
 Function getPalette:RColor(n:Int)
 	if n = 0 Then
-		return new RColor(224, 248, 208,255)
+		return new RColor(5, 31, 57,255)
 	EndIf
 	if n = 1 Then
-        return new RColor(136, 192, 112,255)
+        return new RColor(74, 36, 128,255)
     EndIf
 	if n = 2 Then
-        return new RColor(52, 104, 86,255)
+        return new RColor(197, 58, 157,255)
     EndIf
     if n = 3 Then
-        return new RColor(8, 24, 32,255)
+        return new RColor(255, 142, 128,255)
     EndIf
 
 End Function

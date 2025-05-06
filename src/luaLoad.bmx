@@ -10,14 +10,10 @@ Global inputApi:TinputApi=New TinputApi
 LuaRegisterObject(inputApi,"input")
 Global soundApi:TsoundApi = New TsoundApi
 LuaRegisterObject( soundApi, "sound")
-Global spriteApi:TspriteApi = New TspriteApi
-LuaRegisterObject( spriteApi, "sprite")
-
-
-
-
-
-
+Global spritesApi:TspritesApi = New TspritesApi
+LuaRegisterObject( spritesApi, "sprites")
+Global cameraApi:TcameraApi = New TcameraApi
+LuaRegisterObject( cameraApi, "camera")
 
 function LoadLua(file:String)
     cartName = file

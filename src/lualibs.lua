@@ -175,15 +175,15 @@ setmetatable(timer, tick)
 --
 
 
-Class = {}
-Class.__index = Class
+object = {}
+object.__index = object
 
 
-function Class:new()
+function object:new()
 end
 
 
-function Class:extend()
+function object:extend()
   local cls = {}
   for k, v in pairs(self) do
     if k:find("__") == 1 then
@@ -197,7 +197,7 @@ function Class:extend()
 end
 
 
-function Class:implement(...)
+function object:implement(...)
   for _, cls in pairs({...}) do
     for k, v in pairs(cls) do
       if self[k] == nil and type(v) == "function" then
@@ -208,7 +208,7 @@ function Class:implement(...)
 end
 
 
-function Class:is(T)
+function object:is(T)
   local mt = getmetatable(self)
   while mt do
     if mt == T then
@@ -220,12 +220,12 @@ function Class:is(T)
 end
 
 
-function Class:__tostring()
+function object:__tostring()
   return "object"
 end
 
 
-function Class:__call(...)
+function object:__call(...)
   local obj = setmetatable({}, self)
   obj:new(...)
   return obj

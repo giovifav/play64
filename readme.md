@@ -1,20 +1,22 @@
 # Play64
 
-
-
-
-
-
-
-
-
-
-
+a fantasy console
 
 
 # Documentation
 
 ## input
+
+up button is mapped to key UP and W
+down button is mapped to key DOWN and S
+left button is mapped to key LEFT and A
+right button is mapped to key RIGHT and D
+a button is mapped to key Z and N
+b button is mapped to key X and M
+ESC key to close window
+R key to reset the console
+F key to toogle fullscreen
+P key to pause the game
 
 ### input.down()
 
@@ -22,7 +24,7 @@ Return a string with the key that is pressed
 
 ```lua
 print(input.down()) 
--- print up or down or left or right or z or x
+-- print up or down or left or right or a or b
 ```
 
 ### input.pressed()
@@ -31,7 +33,7 @@ Return a string with the key that has been pressed
 
 ```lua
 print(input.pressed()) 
--- print up or down or left or right or z or x
+-- print up or down or left or right or a or x
 ```
 
 ### input.released()
@@ -40,15 +42,16 @@ Return a string with the key that has been released
 
 ```lua
 print(input.released()) 
--- print up or down or left or right or z or x
+-- print up or down or left or right or a or x
 ```
 
 ## draw
 
 ### colors palette
 
-4 shades of green like the original gameboy
-0 = lightest, 3 = darkest
+4 color palette
+0 = darkest, 3 = brightest
+
 
 ### draw.background(color:Int)
 
@@ -107,6 +110,15 @@ Draw a circle
 draw.rect(30,30,10) 
 ```
 
+### draw.triangle(x1:Int, y1:Int, x2:Int, y2:Int, x3:Int, y3:Int)
+
+Draw a triangle
+
+```lua
+--draw a triangle 
+draw.triangle(1,1,63,1,32,63) 
+```
+
 ## app
 
 ### app.dt()
@@ -134,10 +146,9 @@ toggle the fullscreen mode
 
 reset the cart and go back to selection screen
 
-### app.restart()   
+### app.restart()
 
 restart the current cart
-
 
 ## Sound 
 
@@ -145,8 +156,51 @@ restart the current cart
 
 play a built-in sound by name
 
-the values can be:
-blip click click hit powerup jump pickup laser random synth
+```lua
+--play bump sound effect
+sound.play("bump")
+
+```
+
+Possible values:
+bottle_break, bump, cancel, cat_meow, click, confirm, crunch, digital_alarm, dog_bark, door_slow_open, drink, evil_laugh, explosion, gun, hurt, jump, laser_gun, low_health, menu_in, menu_out, monster_scream, notso_confirm, pause, phone_ring, powerdown, powerup, siren, steps, sword_slash, thunder, trampoline, water_splash, 
+
+## Camera
+
+### camera.target(x:Int, y:Int)
+
+```lua
+--set position of the camera at 10, 10
+camera.target(10,10)
+```
+
+### camera.offset(x:Int, y:Int)
+
+```lua
+--set offset of the camera at 10, 10
+camera.offset(10,10)
+```
+
+### camera.rotation(deg:Float)
+
+```lua
+--set rotation of the camera at 45
+camera.target(45.0)
+```
+
+### camera.zoom(zoom:Float)
+
+```lua
+--set zoom of the camera at 1.2
+camera.target(1.2)
+```
+
+### camera.reset()
+
+```lua
+--reset the camera
+camera.reset()
+```
 
 ## Timer
 

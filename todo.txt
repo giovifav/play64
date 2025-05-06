@@ -1,10 +1,10 @@
 code da fare:
-spriteApi 8x8 ,16x16, 32x32, 64x64
 disegno della console per effetto baziel - con possibilità di rimuoverla
 camera
 sistemare inputApi per accettare piu keybinings
 save system chiave valore per ogni gioco
-documentazione sprite Api
+sprite collision
+tilemap
 
 
 
@@ -15,3 +15,4 @@ joystickcontroller
 Documentazione mancante:
 conf.ini 
 come esportare una cart come gioco standalone
+documentazione sprite Api

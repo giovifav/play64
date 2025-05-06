@@ -1,14 +1,13 @@
 
 -- Constants
-local SCREEN_WIDTH, SCREEN_HEIGHT = 64, 64
 local MAX_SPEED = 1
 
 -- Ship Class
-local Ship = Class:extend()
+local Ship = object:extend()
 
 function Ship:new()
-    self.x = SCREEN_WIDTH / 2
-    self.y = SCREEN_HEIGHT / 2
+    self.x = 64 / 2
+    self.y = 64 / 2
     self.angle = 0
     self.radius = 2
     self.dx = 0
@@ -17,8 +16,8 @@ function Ship:new()
 end
 
 function Ship:update()
-    local turnSpeed = 0.1
-    local accel = 0.1
+    local turnSpeed = 0.3
+    local accel = 0.05
 
     if input.down() == "left" then
         self.angle = self.angle - turnSpeed
@@ -32,8 +31,8 @@ function Ship:update()
         self.dx, self.dy = clampVelocity(self.dx, self.dy, MAX_SPEED)
     end
 
-    self.x = (self.x + self.dx) % SCREEN_WIDTH
-    self.y = (self.y + self.dy) % SCREEN_HEIGHT
+    self.x = (self.x + self.dx) % 64
+    self.y = (self.y + self.dy) % 64
 end
 
 function Ship:draw()
@@ -52,13 +51,13 @@ function Ship:draw()
 end
 
 -- Bullet Class
-local Bullet = Class:extend()
+local Bullet = object:extend()
 
 function Bullet:new(x, y, angle)
     self.x = x
     self.y = y
-    self.dx = math.cos(angle)
-    self.dy = math.sin(angle)
+    self.dx = math.cos(angle) * 2
+    self.dy = math.sin(angle) * 2
 end
 
 function Bullet:update()
@@ -67,7 +66,7 @@ function Bullet:update()
 end
 
 function Bullet:isOffScreen()
-    return self.x < 0 or self.x > SCREEN_WIDTH or self.y < 0 or self.y > SCREEN_HEIGHT
+    return self.x < 0 or self.x > 64 or self.y < 0 or self.y > 64
 end
 
 function Bullet:draw()
@@ -76,19 +75,19 @@ function Bullet:draw()
 end
 
 -- Asteroid Class
-local Asteroid = Class:extend()
+local Asteroid = object:extend()
 
 function Asteroid:new(x, y, dx, dy, radius)
     self.x = x
     self.y = y
-    self.dx = dx
-    self.dy = dy
+    self.dx = dx 
+    self.dy = dy 
     self.radius = radius
 end
 
 function Asteroid:update()
-    self.x = (self.x + self.dx) % SCREEN_WIDTH
-    self.y = (self.y + self.dy) % SCREEN_HEIGHT
+    self.x = (self.x + self.dx) % 64
+    self.y = (self.y + self.dy) % 64
 end
 
 function Asteroid:draw()
@@ -97,7 +96,7 @@ function Asteroid:draw()
 end
 
 -- Game Class
-local Game = Class:extend()
+local Game = object:extend()
 
 function Game:new()
     self.ship = Ship()
@@ -107,16 +106,16 @@ function Game:new()
     self.wave = 1
     self.score = 0
 
-    self:spawnAsteroids(5)
+    self:spawnAsteroids(1)
 end
 
 function Game:spawnAsteroids(count)
     for i = 1, count do
         table.insert(self.asteroids, Asteroid(
-            math.random(0, SCREEN_WIDTH),
-            math.random(0, SCREEN_HEIGHT),
-            math.random(-1, 1) / 2,
-            math.random(-1, 1) / 2,
+            math.random(0, 64),
+            math.random(0, 64),
+            math.random(-1, 1) /3,
+            math.random(-1, 1) / 3,
             2 + math.random() * 2
         ))
     end
@@ -129,16 +128,16 @@ function Game:update()
 
     if #self.asteroids == 0 then
         self.wave = self.wave + 1
-        self:spawnAsteroids(4 + self.wave)
+        self:spawnAsteroids(self.wave)
     end
 
     self.ship:update()
 
-    self.fireCooldown = self.fireCooldown - 1
-    if input.down() == "z" and self.fireCooldown <= 0 then
+   
+    if input.pressed() == "a" then
         table.insert(self.bullets, Bullet(self.ship.x, self.ship.y, self.ship.angle))
-        sound.play("laser")
-        self.fireCooldown = 10
+        sound.play("laser_gun")
+
     end
 
     for i = #self.bullets, 1, -1 do
@@ -152,7 +151,7 @@ function Game:update()
                 if dist(b.x, b.y, a.x, a.y) < a.radius then
                     table.remove(self.asteroids, j)
                     table.remove(self.bullets, i)
-                    sound.play("hit")
+                    sound.play("hurt")
                     self.score = self.score + 1
                     break
                 end

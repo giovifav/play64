@@ -1,6 +1,6 @@
 
 -- Snake Class
-local Snake = Class:extend()
+local Snake = object:extend()
 
 function Snake:new()
     self.body = {{x = 1, y = 1}}
@@ -57,7 +57,7 @@ function Snake:draw()
 end
 
 -- Food Class
-local Food = Class:extend()
+local Food = object:extend()
 
 function Food:new()
     self.x = math.random(1, 32)
@@ -75,7 +75,7 @@ function Food:draw()
 end
 
 -- Game Class
-local Game = Class:extend()
+local Game = object:extend()
 
 function Game:new()
     self.snake = Snake()
@@ -111,7 +111,7 @@ function Game:update()
         -- Check collision with food
         local head = self.snake.body[1]
         if head.x == self.food.x and head.y == self.food.y then
-            sound.play("Powerup")
+            sound.play("powerup")
             self.food:relocate()
             self.score = self.score + 1
             draw.background(1)
@@ -125,7 +125,7 @@ function Game:update()
         -- Check collision with walls or itself
         if self.snake:checkCollision() then
             self.gameOver = true
-            sound.play("Explosion")
+            sound.play("explosion")
             draw.background(1)
             timer.delay(function()
                 draw.background(0)

@@ -7,7 +7,7 @@ local PADDLE_SPEED = 2
 local AI_SPEED = 1
 
 -- Paddle Class
-local Paddle = Class:extend()
+local Paddle = object:extend()
 
 function Paddle:new(x, y)
     self.x = x
@@ -28,7 +28,7 @@ function Paddle:draw()
 end
 
 -- Ball Class
-local Ball = Class:extend()
+local Ball = object:extend()
 
 function Ball:new()
     self.x = WINDOW_WIDTH / 2 - BALL_SIZE / 2
@@ -96,7 +96,7 @@ function Ball:deflect(paddle)
 end
 
 -- Game Class
-local Game = Class:extend()
+local Game = object:extend()
 
 function Game:new()
     self.player = Paddle(2, WINDOW_HEIGHT / 2 - PADDLE_HEIGHT / 2)

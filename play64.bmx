@@ -11,7 +11,8 @@ Include "src/drawApi.bmx"
 Include "src/inputApi.bmx"
 Include "src/appApi.bmx"
 Include "src/soundApi.bmx"	
-Include "src/spriteApi.bmx"
+Include "src/spritesApi.bmx"
+Include "src/cameraApi.bmx"
 Include "src/Tlist.bmx"
 Include "src/luaLoad.bmx"
 Include "src/Tconfig.bmx"
@@ -20,8 +21,8 @@ Incbin "src/titlescreen.lua"
 
 Global CONF:Tconfig = New Tconfig()
 'configurazione di base
-Global windowWidth:Int = 800
-Global windowHeight:Int = 450
+Global windowWidth:Int = Int(CONF.width.GetValue())
+Global windowHeight:Int = Int(CONF.height.GetValue())
 Global windowTitle:String = CONF.title.GetValue()
 Const gameScreenWidth:Int = 64
 Const gameScreenHeight:Int = 64
@@ -33,6 +34,12 @@ InitWindow(windowWidth, windowHeight, windowTitle)
 
 SetWindowMinSize(320, 180)
 SetTargetFPS(30)               ' Set our game to run at 30 frames-per-second
+Global camera2d:RCamera2D = New RCamera2D()
+camera2d.target = New RVector2(0, 0)
+camera2d.offset = New RVector2(0,0)
+camera2d.rotation = 0.0
+camera2d.zoom = 1.0
+'--------------------------------------------------------------------------------------
 
 ' Render texture initialization, used to hold the rendering result so we can easily resize it
 Local target:RRenderTexture2D = LoadRenderTexture(gameScreenWidth, gameScreenHeight)
@@ -60,6 +67,7 @@ While Not WindowShouldClose()
 	'----------------------------------------------------------------------------------
 	' Draw everything in the render texture, note this will not be rendered on screen, yet
 	BeginTextureMode(target)
+	BeginMode2D(camera2d ) 
 	ClearBackground(drawApi.bg)
 	If cartName = "" Then
 		list.Update()
@@ -67,6 +75,11 @@ While Not WindowShouldClose()
 	Else
 		RunLua()
 		If IsKeyPressed( KEY_R ) Then
+			'reset camera
+			camera2d.target = New RVector2(0, 0)
+			camera2d.offset = New RVector2(0,0)
+			camera2d.rotation = 0.0
+			camera2d.zoom = 1.0
 			If FileType("carts/" + String(CONF.game.GetValue()) + ".lua") = 1 Then
 				LoadLua(CONF.game.GetValue()) ' Load the Lua file and run the init function
 			Else
@@ -75,15 +88,17 @@ While Not WindowShouldClose()
 			EndIf
 		EndIf
 	EndIf
+	
+	EndMode2D()
 	EndTextureMode()
 
 	BeginDrawing()
-	ClearBackground(getPalette(3)) 
-	' Draw RenderTexture2D to window, properly scaled
-	DrawTexturePro(target.texture, ..
-			New RRectangle(0.0, 0.0, Float(target.texture.width), Float(-target.texture.height)), ..
-			New RRectangle((GetScreenWidth() - Float(gameScreenWidth*Scale))*0.5, (GetScreenHeight() - Float(gameScreenHeight*Scale))*0.5, Float(gameScreenWidth*Scale), Float(gameScreenHeight*Scale)), ..
-			New RVector2(0, 0), 0.0, WHITE)
+	ClearBackground(getPalette(3))
+		' Draw RenderTexture2D to window, properly scaled
+		DrawTexturePro(target.texture, ..
+				New RRectangle(0.0, 0.0, Float(target.texture.width), Float(-target.texture.height)), ..
+				New RRectangle((GetScreenWidth() - Float(gameScreenWidth*Scale))*0.5, (GetScreenHeight() - Float(gameScreenHeight*Scale))*0.5, Float(gameScreenWidth*Scale), Float(gameScreenHeight*Scale)), ..
+				New RVector2(0, 0), 0.0, WHITE)
 	EndDrawing()
 	'--------------------------------------------------------------------------------------
 Wend
@@ -92,5 +107,6 @@ Wend
 '--------------------------------------------------------------------------------------
 CONF.close()
 UnloadRenderTexture(target)    ' Unload render texture
+spritesApi.unload()		  ' Unload sprites
 CloseWindow()                  ' Close window and OpenGL context
 '--------------------------------------------------------------------------------------
