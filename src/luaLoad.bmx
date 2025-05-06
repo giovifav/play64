@@ -1,7 +1,7 @@
 
-Global cartName:String = ""
-Global instance:TLuaObject
-Global class:TLuaClass
+Global CART:String = ""
+Global LUAINSTANCE:TLuaObject
+Global LUACLASS:TLuaClass
 Global drawApi:TdrawApi=New TdrawApi
 LuaRegisterObject(drawApi,"draw")
 Global appApi:TappApi=New TappApi
@@ -16,23 +16,23 @@ Global cameraApi:TcameraApi = New TcameraApi
 LuaRegisterObject( cameraApi, "camera")
 
 function LoadLua(file:String)
-    cartName = file
+    CART = file
 	Local source:String =  LoadFileAsString("incbin::src/lualibs.lua") +  LoadFileAsString(  "carts/" + file + ".lua" )
-	class:TLuaClass=TLuaClass.Create( source )
-	instance:TLuaObject=TLuaObject.Create( class,Null )
-	instance.Invoke("init",Null)'esegui funzione init del programma in lua
+	LUACLASS:TLuaLUACLASS=TLuaClass.Create( source )
+	LUAINSTANCE:TLuaObject=TLuaObject.Create( LUACLASS,Null )
+	LUAINSTANCE.Invoke("init",Null)'esegui funzione init del programma in lua
 EndFunction
 
 function LoadLuaInc(file:String)
-    cartName = file
+    CART = file
 	Local source:String =  LoadFileAsString("incbin::src/lualibs.lua") +  LoadFileAsString(  "incbin::src/" + file + ".lua" )
-	class:TLuaClass=TLuaClass.Create( source )
-	instance:TLuaObject=TLuaObject.Create( class,Null )
-	instance.Invoke("init",Null)'esegui funzione init del programma in lua
+	LUACLASS:TLuaLUACLASS=TLuaClass.Create( source )
+	LUAINSTANCE:TLuaObject=TLuaObject.Create( LUACLASS,Null )
+	LUAINSTANCE.Invoke("init",Null)'esegui funzione init del programma in lua
 EndFunction
 
 function RunLua()
-	instance.Invoke("update",Null)
+	LUAINSTANCE.Invoke("update",Null)
 EndFunction
 
 Function LoadFileAsString:String(url:Object)

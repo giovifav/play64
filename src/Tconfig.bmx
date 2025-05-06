@@ -33,4 +33,29 @@ Type Tconfig
 		ini.Free()
 	EndMethod
 
+	Method saveData(key:String, value:String)
+		Local section:TIniSection = ini.FindSection("SAVE_" + CART)
+		if not section Then
+			section = ini.AddSection("SAVE_" + CART)
+		EndIf
+		Local property:TIniProperty = section.FindProperty(key)
+		if property Then
+			property.SetValue(value)
+		Else
+			section.AddProperty(key, value)
+		EndIf
+		ini.Save("config.ini")
+	EndMethod
+
+	Method getData:String(key:String)
+		Local section:TIniSection = ini.FindSection("SAVE_" + CART)
+		if section Then
+			Local property:TIniProperty = section.FindProperty(key)
+			if property Then
+				return property.GetValue()
+			EndIf
+		EndIf
+		return ""
+	EndMethod
+
 EndType

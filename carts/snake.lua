@@ -1,18 +1,25 @@
-
 -- Snake Class
 local Snake = object:extend()
 
 function Snake:new()
-    self.body = {{x = 1, y = 1}}
+    self.body = {{
+        x = 1,
+        y = 1
+    }}
     self.direction = "right"
     self.canMove = true
 end
 
 function Snake:update()
-    if not self.canMove then return end
+    if not self.canMove then
+        return
+    end
 
     local head = self.body[1]
-    local newHead = {x = head.x, y = head.y}
+    local newHead = {
+        x = head.x,
+        y = head.y
+    }
 
     if self.direction == "right" then
         newHead.x = newHead.x + 1
@@ -82,15 +89,37 @@ function Game:new()
     self.food = Food()
     self.score = 0
     self.gameOver = false
+    self.highscore = tonumber(app.load("highscore"))
+    if self.highscore == nil then
+        self.highscore = 0
+    end
+    self.scoreScreen = false
 end
 
 function Game:update()
     if self.gameOver then
         delayTimer:stop()
-        self:reset()
-        
+        if self.score > self.highscore then
+            app.save("highscore", tostring(self.score))
+            self.highscore = self.score
+            self.scoreScreen = true
+            self.gameOver = false
+            timer.delay(function()
+                self:reset()
+            end, 3)
+            return
+        else
+            draw.background(1)
+            timer.delay(function()
+                draw.background(0)
+            end, 0.3)
+            self:reset()
+            return
+        end
         return
     end
+
+
 
     -- Handle input
     local key = input.down()
@@ -126,10 +155,7 @@ function Game:update()
         if self.snake:checkCollision() then
             self.gameOver = true
             sound.play("explosion")
-            draw.background(1)
-            timer.delay(function()
-                draw.background(0)
-            end, 0.3)
+
         end
 
         -- Delay movement
@@ -141,9 +167,16 @@ function Game:update()
 end
 
 function Game:draw()
+    if self.scoreScreen then
+        draw.background(0)
+        draw.color(2)
+        draw.text("High", 10, 10, 10)
+        draw.text("Score", 10, 20, 10)
+        draw.text(self.score, 10, 30, 10)
+        return
+    end
     self.snake:draw()
     self.food:draw()
-
     draw.color(2)
     draw.text(self.score, 2, 2, 5)
 end
@@ -153,6 +186,7 @@ function Game:reset()
     self.food = Food()
     self.score = 0
     self.gameOver = false
+    self.scoreScreen = false
 end
 
 -- Main Game Loop

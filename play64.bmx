@@ -77,7 +77,7 @@ While Not WindowShouldClose()
 			PAUSE = True
 		EndIf
 
-		If cartName = "" Then
+		If CART = "" Then
 			list.Update()
 			list.Draw()
 		Else
@@ -91,7 +91,7 @@ While Not WindowShouldClose()
 				If FileType("carts/" + String(CONF.game.GetValue()) + ".lua") = 1 Then
 					LoadLua(CONF.game.GetValue()) ' Load the Lua file and run the init function
 				Else
-					cartName = ""
+					CART = ""
 					SetWindowTitle(windowTitle)
 				EndIf
 			EndIf

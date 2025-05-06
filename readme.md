@@ -2,6 +2,82 @@
 
 a fantasy console
 
+- [Play64](#play64)
+  - [Controls](#controls)
+  - ["config.ini" file](#configini-file)
+  - [How to release your game](#how-to-release-your-game)
+  - [input](#input)
+    - [input.down()](#inputdown)
+    - [input.pressed()](#inputpressed)
+    - [input.released()](#inputreleased)
+  - [draw](#draw)
+    - [colors palette](#colors-palette)
+    - [draw.background(color:Int)](#drawbackgroundcolorint)
+    - [draw.color(color:Int)](#drawcolorcolorint)
+    - [draw.point(x:Int, y:int )](#drawpointxint-yint-)
+    - [draw.line(startx:Int, startY:Int, endX:Int, endY:Int)](#drawlinestartxint-startyint-endxint-endyint)
+    - [draw.rect(x:Int, y:Int, Width:Int, height:Int)](#drawrectxint-yint-widthint-heightint)
+    - [draw.text(text:String, x:Int, y:Int, size:Int)](#drawtexttextstring-xint-yint-sizeint)
+    - [draw.circle(x:Int, y:Int, Radius:Int)](#drawcirclexint-yint-radiusint)
+    - [draw.triangle(x1:Int, y1:Int, x2:Int, y2:Int, x3:Int, y3:Int)](#drawtrianglex1int-y1int-x2int-y2int-x3int-y3int)
+    - [draw.sprite(title:String, x:Int, y:Int)](#drawspritetitlestring-xint-yint)
+  - [app](#app)
+    - [app.dt()](#appdt)
+    - [app.title(title:String)](#apptitletitlestring)
+    - [app.width(width:Int)](#appwidthwidthint)
+    - [app.height(heigth:Int)](#appheightheigthint)
+    - [app.fullscreen()](#appfullscreen)
+    - [app.reset()](#appreset)
+    - [app.restart()](#apprestart)
+    - [app.loadCart(cart:String)](#apploadcartcartstring)
+    - [app.load(key:String, value:String)](#apploadkeystring-valuestring)
+  - [Sound](#sound)
+    - [sound.play(sound:String)](#soundplaysoundstring)
+  - [Camera](#camera)
+    - [camera.target(x:Int, y:Int)](#cameratargetxint-yint)
+    - [camera.offset(x:Int, y:Int)](#cameraoffsetxint-yint)
+    - [camera.rotation(deg:Float)](#camerarotationdegfloat)
+    - [camera.zoom(zoom:Float)](#camerazoomzoomfloat)
+    - [camera.reset()](#camerareset)
+  - [Sprites](#sprites)
+    - [sprites.add(title:String, data:String)](#spritesaddtitlestring-datastring)
+    - [sprites.draw(title:String, x:Int, y:Int)](#spritesdrawtitlestring-xint-yint)
+    - [sprites.collision(sprite1:String, x1:Int, y1:Int, sprite2:String, x2:Int, y2:Int)](#spritescollisionsprite1string-x1int-y1int-sprite2string-x2int-y2int)
+  - [Timer](#timer)
+    - [timer.delay(fn, delay)](#timerdelayfn-delay)
+    - [timer.recur(fn, delay)](#timerrecurfn-delay)
+    - [Chaining events](#chaining-events)
+    - [Stopping events](#stopping-events)
+    - [Groups timer provides the ability to create event groups; these are objects which can](#groups-timer-provides-the-ability-to-create-event-groups-these-are-objects-which-can)
+  - [object](#object)
+    - [Creating a new class](#creating-a-new-class)
+    - [Creating a new object](#creating-a-new-object)
+    - [Extending an existing class](#extending-an-existing-class)
+    - [Checking an object's type](#checking-an-objects-type)
+    - [Using mixins](#using-mixins)
+    - [Using static variables](#using-static-variables)
+    - [Creating a metamethod](#creating-a-metamethod)
+  - [Tween](#tween)
+    - [Tween creation](#tween-creation)
+    - [Tween methods](#tween-methods)
+    - [Easing functions](#easing-functions)
+    - [Custom easing functions](#custom-easing-functions)
+  - [Credits](#credits)
+
+
+## Controls
+
+* up button is mapped to key UP and W
+* down button is mapped to key DOWN and S
+* left button is mapped to key LEFT and A
+* right button is mapped to key RIGHT and D
+* a button is mapped to key Z and N
+* b button is mapped to key X and M
+* ESC key to close window
+* R key to reset the console
+* F key to toogle fullscreen
+* P key to pause the game
+
 ## "config.ini" file
 
 the config.ini file all the setting for the app and all saved games
@@ -42,17 +118,6 @@ To prepare your game for release, edit the config.ini file: set Game to the inte
 ## input
 
 The object module offer an interface to the input system
-
-* up button is mapped to key UP and W
-* down button is mapped to key DOWN and S
-* left button is mapped to key LEFT and A
-* right button is mapped to key RIGHT and D
-* a button is mapped to key Z and N
-* b button is mapped to key X and M
-* ESC key to close window
-* R key to reset the console
-* F key to toogle fullscreen
-* P key to pause the game
 
 ### input.down()
 
@@ -204,6 +269,22 @@ reset the cart and go back to selection screen
 
 restart the current cart
 
+### app.loadCart(cart:String)
+
+load a specific cart
+
+```lua
+app.loadCart("snake")
+```
+
+### app.load(key:String, value:String)
+
+save a value of the current game
+
+```lua
+app.load("highscore", "1000")
+```
+
 ## Sound
 
 The object module offer an interface to sound system
@@ -215,7 +296,6 @@ play a built-in sound by name
 ```lua
 --play bump sound effect
 sound.play("bump")
-
 ```
 
 Possible values:
@@ -291,7 +371,7 @@ draw.sprite("enemy", 10,10)
 Return 1 in case of collision
 
 ```lua
-if sprites.collision("player",1,1,"enemy",10,10) == 1 then 
+if sprites.collision("player",player.x,player.y,"enemy",enemy.x,enemy.Y) == 1 then 
   --Collision! Do something
 end
 ```

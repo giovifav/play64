@@ -21,9 +21,24 @@ Type TappApi
 	EndMethod
 
 	Method reset()
-		cartName = ""
+		CART = ""
 	EndMethod
+
 	Method restart()
-		LoadLua(cartName)
+		LoadLua(CART)
 	EndMethod
+
+	Method loadCart(cart:String)
+		CART = cart
+		LoadLua(CART)
+	EndMethod
+
+	Method save(key:String, value:String)
+		CONF.saveData(key, value)
+	EndMethod
+
+	Method load:String(key:String)
+		return CONF.getData(key)
+	EndMethod
+
 EndType

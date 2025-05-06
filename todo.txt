@@ -1,10 +1,7 @@
 code da fare:
 disegno della console per effetto baziel - con possibilità di rimuoverla
-camera
-sistemare inputApi per accettare piu keybinings
-save system chiave valore per ogni gioco
-sprite collision
 tilemap
+snake lua - title screen
 
 
 
@@ -13,6 +10,3 @@ importare immagini da assets gratuiti 1-bit 8x8  come sprite pre definte
 joystickcontroller
 
 Documentazione mancante:
-conf.ini 
-come esportare una cart come gioco standalone
-documentazione sprite Api
