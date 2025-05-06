@@ -1,12 +1,13 @@
 code da fare:
 disegno della console per effetto baziel - con possibilità di rimuoverla
 tilemap
-snake lua - title screen
-
-
+rendere personalizzabili le palette da config.ini
+sezione setting da rinominare in sezione app
+color class per avere piu palette disponibili
 
 idee:
 importare immagini da assets gratuiti 1-bit 8x8  come sprite pre definte
 joystickcontroller
 
 Documentazione mancante:
+save system - precisare la conversione da string

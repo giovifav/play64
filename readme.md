@@ -30,6 +30,7 @@ a fantasy console
     - [app.reset()](#appreset)
     - [app.restart()](#apprestart)
     - [app.loadCart(cart:String)](#apploadcartcartstring)
+    - [app.save(key:String, value:String)](#appsavekeystring-valuestring)
     - [app.load(key:String, value:String)](#apploadkeystring-valuestring)
   - [Sound](#sound)
     - [sound.play(sound:String)](#soundplaysoundstring)
@@ -277,12 +278,20 @@ load a specific cart
 app.loadCart("snake")
 ```
 
-### app.load(key:String, value:String)
+### app.save(key:String, value:String)
 
 save a value of the current game
 
 ```lua
-app.load("highscore", "1000")
+app.save("highscore", "1000")
+```
+
+### app.load(key:String, value:String)
+
+load a value of the current game
+
+```lua
+app.load("highscore")
 ```
 
 ## Sound

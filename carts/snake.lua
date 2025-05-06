@@ -94,10 +94,19 @@ function Game:new()
         self.highscore = 0
     end
     self.scoreScreen = false
+    self.startScreen = true
 end
 
 function Game:update()
+    if self.startScreen then
+        if input.pressed() == "a" then
+            self.startScreen = false
+            self:reset()
+        end
+        return
+    end
     if self.gameOver then
+        self.startScreen = true
         delayTimer:stop()
         if self.score > self.highscore then
             app.save("highscore", tostring(self.score))
@@ -105,20 +114,21 @@ function Game:update()
             self.scoreScreen = true
             self.gameOver = false
             timer.delay(function()
+                self.startScreen = true
                 self:reset()
-            end, 3)
+            end, 5)
             return
         else
-            draw.background(1)
-            timer.delay(function()
-                draw.background(0)
-            end, 0.3)
+            self.startScreen = true
+
             self:reset()
             return
         end
         return
     end
-
+    if self.scoreScreen then
+        return
+    end
 
 
     -- Handle input
@@ -170,14 +180,29 @@ function Game:draw()
     if self.scoreScreen then
         draw.background(0)
         draw.color(2)
-        draw.text("High", 10, 10, 10)
-        draw.text("Score", 10, 20, 10)
-        draw.text(self.score, 10, 30, 10)
+        draw.text("New", 10, 10, 10)
+        draw.text("high", 10, 20, 10)
+        draw.text("Score!", 10, 30, 10)
+        draw.color(3)
+        draw.text(self.score, 10, 40, 10)
+        return
+    end
+    if self.startScreen then
+        draw.background(0)
+        draw.color(3)
+        draw.text("Snake", 3, 5, 14)
+        draw.color(2)
+        draw.text("Press A", 3, 20, 10)
+        draw.text("to Start.", 3, 30, 10)
+        draw.color(1)
+        draw.text("Highscore:", 3, 40, 10)
+        draw.color(2)
+        draw.text(self.highscore, 3, 50, 10)
         return
     end
     self.snake:draw()
     self.food:draw()
-    draw.color(2)
+    draw.color(1)
     draw.text(self.score, 2, 2, 5)
 end
 
