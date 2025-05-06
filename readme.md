@@ -2,21 +2,57 @@
 
 a fantasy console
 
+## "config.ini" file
 
-# Documentation
+the config.ini file all the setting for the app and all saved games
+
+```ini
+[Settings]
+; This is the configuration file for the Play64 fantasy console
+; It contains settings for the console
+
+Fullscreen=False
+; Set to True for fullscreen mode
+; Set to False for windowed mode
+
+Width=800
+; Width of the window in pixels
+
+Height=600
+; Height of the window in pixels
+
+Intro=True
+; Set to True to show the intro screen
+; Set to False to skip the intro screen
+
+Game=
+; The name of the game to load
+; Leave empty to load the selection screen
+
+Title=Play64 fantasy console
+; This is the title of the window
+; It will be displayed in the title bar
+; The title of the window can be changed in the code
+```
+
+## How to release your game
+
+To prepare your game for release, edit the config.ini file: set Game to the internal name of your game, Title to the display title, and Intro to False. Remove any unused files from the carts directory. Finally, you may rename the play64.exe executable as needed.
 
 ## input
 
-up button is mapped to key UP and W
-down button is mapped to key DOWN and S
-left button is mapped to key LEFT and A
-right button is mapped to key RIGHT and D
-a button is mapped to key Z and N
-b button is mapped to key X and M
-ESC key to close window
-R key to reset the console
-F key to toogle fullscreen
-P key to pause the game
+The object module offer an interface to the input system
+
+* up button is mapped to key UP and W
+* down button is mapped to key DOWN and S
+* left button is mapped to key LEFT and A
+* right button is mapped to key RIGHT and D
+* a button is mapped to key Z and N
+* b button is mapped to key X and M
+* ESC key to close window
+* R key to reset the console
+* F key to toogle fullscreen
+* P key to pause the game
 
 ### input.down()
 
@@ -33,7 +69,7 @@ Return a string with the key that has been pressed
 
 ```lua
 print(input.pressed()) 
--- print up or down or left or right or a or x
+-- print up or down or left or right or a or b
 ```
 
 ### input.released()
@@ -42,20 +78,22 @@ Return a string with the key that has been released
 
 ```lua
 print(input.released()) 
--- print up or down or left or right or a or x
+-- print up or down or left or right or a or b
 ```
 
 ## draw
+
+The object module offer an interface to the drawing commands
 
 ### colors palette
 
 4 color palette
 0 = darkest, 3 = brightest
 
-
 ### draw.background(color:Int)
 
 Change the color of background
+0 = darkest, 3 = brightest
 
 ```lua
 draw.background(0)
@@ -64,6 +102,11 @@ draw.background(0)
 ### draw.color(color:Int)
 
 set the color of the draw command
+0 = darkest, 3 = brightest
+
+```lua
+draw.color(3)
+```
 
 ### draw.point(x:Int, y:int )
 
@@ -96,8 +139,9 @@ draw.rect(0,0,20,20)
 ### draw.text(text:String, x:Int, y:Int, size:Int)
 
 Print a string of text
+Minimum size = 10
 
-```lua 
+```lua
 draw.text("a string of text",0,0,15) 
 ```
 
@@ -119,7 +163,17 @@ Draw a triangle
 draw.triangle(1,1,63,1,32,63) 
 ```
 
+### draw.sprite(title:String, x:Int, y:Int)
+
+```lua
+draw.sprite("enemy", 10,10)
+-- same as
+sprites.draw("enemy",10,10)
+```
+
 ## app
+
+The object module offer an interface for manage all the app settings
 
 ### app.dt()
 
@@ -150,7 +204,9 @@ reset the cart and go back to selection screen
 
 restart the current cart
 
-## Sound 
+## Sound
+
+The object module offer an interface to sound system
 
 ### sound.play(sound:String)
 
@@ -163,9 +219,11 @@ sound.play("bump")
 ```
 
 Possible values:
-bottle_break, bump, cancel, cat_meow, click, confirm, crunch, digital_alarm, dog_bark, door_slow_open, drink, evil_laugh, explosion, gun, hurt, jump, laser_gun, low_health, menu_in, menu_out, monster_scream, notso_confirm, pause, phone_ring, powerdown, powerup, siren, steps, sword_slash, thunder, trampoline, water_splash, 
+bottle_break, bump, cancel, cat_meow, click, confirm, crunch, digital_alarm, dog_bark, door_slow_open, drink, evil_laugh, explosion, gun, hurt, jump, laser_gun, low_health, menu_in, menu_out, monster_scream, notso_confirm, pause, phone_ring, powerdown, powerup, siren, steps, sword_slash, thunder, trampoline, water_splash,
 
 ## Camera
+
+The object module offer an interface to the camera system
 
 ### camera.target(x:Int, y:Int)
 
@@ -202,7 +260,45 @@ camera.target(1.2)
 camera.reset()
 ```
 
+## Sprites
+
+### sprites.add(title:String, data:String)
+
+Return title:String
+
+```lua
+    local enemySprite = [[
+        0 0 0 0 0 0 0 0 0 0
+        0 1 1 1 1 1 1 1 1 0
+        0 1 0 0 0 0 0 0 1 0
+        0 1 0 1 1 1 1 0 1 0
+        0 1 0 1 0 0 1 0 1 0
+        0 1 0 1 1 1 1 0 1 0
+        ]]
+    sprite = sprites.add("enemy", enemySprite) -- sprite == "enemy"
+```
+
+### sprites.draw(title:String, x:Int, y:Int)
+
+```lua
+sprites.draw("enemy",10,10)
+-- same as
+draw.sprite("enemy", 10,10)
+```
+
+### sprites.collision(sprite1:String, x1:Int, y1:Int, sprite2:String, x2:Int, y2:Int)
+
+Return 1 in case of collision
+
+```lua
+if sprites.collision("player",1,1,"enemy",10,10) == 1 then 
+  --Collision! Do something
+end
+```
+
 ## Timer
+
+The object module offer an interface for manage timers
 
 ### timer.delay(fn, delay)
 
@@ -359,6 +455,8 @@ end
 
 ## Tween
 
+The object module offer an interface for tweening
+
 ### Tween creation
 
 ``` lua
@@ -388,8 +486,6 @@ Gradually changes the contents of `subject` to that it looks more like `target` 
 
 When the tween is complete, the values in `subject` will be equal to `target`'s. The way they change over time will depend on the chosen easing function.
 
-
-
 ``` lua
 local complete = t:set(clock)
 ```
@@ -402,7 +498,6 @@ Moves a tween's internal clock to a particular moment.
 
 If clock is greater than `t.duration`, then the values in `t.subject` will be equal to `t.target`, and `t.clock` will
 be equal to `t.duration`.
-
 
 ``` lua
 t:reset()
@@ -418,8 +513,6 @@ This method is equivalent to `t:set(0)`.
 
 Easing functions are functions that express how slow/fast the interpolation happens in tween.
 
-`tween.lua` comes with 45 default easing functions already built-in (adapted from [Emmanuel Oga's easing library](https://github.com/EmmanuelOga/easing)).
-
 The easing functions can be found in the table `tween.easing`.
 
 They can be divided into several families:
@@ -431,6 +524,7 @@ They can be divided into several families:
 * The `elastic` family simulates inertia in the easing, like an elastic gum.
 
 Each family (except `linear`) has 4 variants:
+
 * `in` starts slow, and accelerates at the end
 * `out` starts fast, and decelerates at the end
 * `inOut` starts and ends slow, but it's fast in the middle
@@ -476,8 +570,6 @@ The passed function will need to take 4 parameters:
 
 And must return the new value after the interpolation occurs.
 
-
-
 ``` lua
 local cubicbezier = function (x1, y1, x2, y2)
   local curve = love.math.newBezierCurve(0, 0, x1, y1, x2, y2, 1, 1)
@@ -488,13 +580,12 @@ local label = { x=200, y=0, text = "hello" }
 local labelTween = tween.new(4, label, {y=300}, cubicbezier(.35, .97, .58, .61))
 ```
 
-
 ## Credits
 
-Engine written in [BlitzMax NG](https://blitzmax.org/).  
-Carts written in [Lua 5.1](https://www.lua.org/).  
-The graphic library is [Raylib](https://www.raylib.com/).  
-[Classic by rxi](https://github.com/rxi/classic) for lua OOP.  
-[Tween by kikito](https://github.com/kikito/tween.lua).  
-[Tick by rxi](https://github.com/rxi/tick)
-Sound Effects by Coffee 'Valen' Bat
+* Engine written in [BlitzMax NG](https://blitzmax.org/)
+* Carts written in [Lua 5.1](https://www.lua.org/)
+* The graphic library is [Raylib](https://www.raylib.com/)
+* [Classic by rxi](https://github.com/rxi/classic) for lua OOP  
+* [Tween by kikito](https://github.com/kikito/tween.lua)
+* [Tick by rxi](https://github.com/rxi/tick)
+* Sound Effects by Coffee 'Valen' Bat

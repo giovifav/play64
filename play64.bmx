@@ -27,6 +27,7 @@ Global windowTitle:String = CONF.title.GetValue()
 Const gameScreenWidth:Int = 64
 Const gameScreenHeight:Int = 64
 Local list:TgameList = New TgameList()
+Global PAUSE:Int = False
 
 'creazione della finestra 
 SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT)
@@ -59,6 +60,7 @@ While Not WindowShouldClose()
 	If IsKeyPressed( KEY_F ) Then
 		ToggleBorderlessWindowed()
 	EndIf
+
 	' Update
 	'----------------------------------------------------------------------------------
 	' Compute required framebuffer scaling
@@ -69,23 +71,37 @@ While Not WindowShouldClose()
 	BeginTextureMode(target)
 	BeginMode2D(camera2d ) 
 	ClearBackground(drawApi.bg)
-	If cartName = "" Then
-		list.Update()
-		list.Draw()
-	Else
-		RunLua()
-		If IsKeyPressed( KEY_R ) Then
-			'reset camera
-			camera2d.target = New RVector2(0, 0)
-			camera2d.offset = New RVector2(0,0)
-			camera2d.rotation = 0.0
-			camera2d.zoom = 1.0
-			If FileType("carts/" + String(CONF.game.GetValue()) + ".lua") = 1 Then
-				LoadLua(CONF.game.GetValue()) ' Load the Lua file and run the init function
-			Else
-				cartName = ""
-				SetWindowTitle(windowTitle)
+	If PAUSE = False Then
+
+		If IsKeyPressed( KEY_P ) Then
+			PAUSE = True
+		EndIf
+
+		If cartName = "" Then
+			list.Update()
+			list.Draw()
+		Else
+			RunLua()
+			If IsKeyPressed( KEY_R ) Then
+				'reset camera
+				camera2d.target = New RVector2(0, 0)
+				camera2d.offset = New RVector2(0,0)
+				camera2d.rotation = 0.0
+				camera2d.zoom = 1.0
+				If FileType("carts/" + String(CONF.game.GetValue()) + ".lua") = 1 Then
+					LoadLua(CONF.game.GetValue()) ' Load the Lua file and run the init function
+				Else
+					cartName = ""
+					SetWindowTitle(windowTitle)
+				EndIf
 			EndIf
+		EndIf
+	Else
+		' Draw pause menu
+		DrawText("PAUSED", 11, 22, 10, getPalette(3))
+		DrawText("Press P", 11, 32, 10, getPalette(2))
+		If IsKeyPressed( KEY_P ) Then
+			PAUSE = False
 		EndIf
 	EndIf
 	
