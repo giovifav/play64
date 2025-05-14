@@ -7,9 +7,7 @@ Import brl.maxlua
 Import brl.filesystem
 Import Text.ini
 Import brl.map
-'Import MaxGUI.Drivers
-'Import BRL.EventQueue
-'Import BRL.TextStream
+
 
 
 Include "src/drawApi.bmx"
