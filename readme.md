@@ -1,8 +1,11 @@
 # Play64
 
 Play64 is a fantasy console developed for The Tool Jam 2025.
+
 It features a D-pad and two action buttons, with a display capable of rendering four shades of violet.
-Games—referred to as "carts"—are written in Lua 5.1.
+
+Games are written in Lua 5.1.
+
 The console itself is implemented using BlitzMax NG and the Raylib graphics library.
 
 
