@@ -5,6 +5,10 @@ It features a D-pad and two action buttons, with a display capable of rendering 
 Games—referred to as "carts"—are written in Lua 5.1.
 The console itself is implemented using BlitzMax NG and the Raylib graphics library.
 
+
+https://github.com/user-attachments/assets/d3407e81-d0d5-4821-9e4d-ee68e37a5cda
+
+
 ## Controls
 
 * The up button is mapped to the UP and W keys
