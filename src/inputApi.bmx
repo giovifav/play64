@@ -2,81 +2,81 @@
 Type TinputApi
 
 	Method down:string()
-		If IsKeyDown( KEY_Z ) or IsKeyDown( KEY_N ) Then
+		If IsKeyDown( ray.lib.KEY_Z ) or IsKeyDown( ray.lib.KEY_N ) Then
 			return "a"
 		EndIf
 
-		If IsKeyDown( KEY_x ) or IsKeyDown( KEY_M ) Then
+		If IsKeyDown( ray.lib.KEY_X ) or IsKeyDown( ray.lib.KEY_M ) Then
 			return "b"
 		EndIf
 
-		If IsKeyDown( KEY_UP ) or IsKeyDown( KEY_W ) Then
+		If IsKeyDown( ray.lib.KEY_UP ) or IsKeyDown( ray.lib.KEY_W ) Then
 			return "up"
 		EndIf
 
-		If IsKeyDown( KEY_DOWN ) or IsKeyDown( KEY_S ) Then
+		If IsKeyDown( ray.lib.KEY_DOWN ) or IsKeyDown( ray.lib.KEY_S ) Then
 			return "down"
 		EndIf
 
-		If IsKeyDown( KEY_LEFT ) or IsKeyDown( KEY_A ) Then
+		If IsKeyDown( ray.lib.KEY_LEFT ) or IsKeyDown( ray.lib.KEY_A ) Then
 			return "left"
 		EndIf
 
-		If IsKeyDown( KEY_RIGHT ) or IsKeyDown( KEY_D ) Then
+		If IsKeyDown( ray.lib.KEY_RIGHT ) or IsKeyDown( ray.lib.KEY_D ) Then
 			return "right"
 		EndIf
 		
 	EndMethod
 
 	Method pressed:string()
-		If IsKeyPressed( KEY_Z ) Or IsKeyPressed( KEY_N ) Then
+		If IsKeyPressed( ray.lib.KEY_Z ) Or IsKeyPressed( ray.lib.KEY_N ) Then
 			return "a"
 		EndIf
 
-		If IsKeyPressed( KEY_x ) Or IsKeyPressed( KEY_M) Then
+		If IsKeyPressed( ray.lib.KEY_X ) Or IsKeyPressed( ray.lib.KEY_M) Then
 			return "b"
 		EndIf
 
-		If IsKeyPressed( KEY_UP ) Or IsKeyPressed( KEY_W ) Then
+		If IsKeyPressed( ray.lib.KEY_UP ) Or IsKeyPressed( ray.lib.KEY_W ) Then
 			return "up"
 		EndIf
 
-		If IsKeyPressed( KEY_DOWN ) Or IsKeyPressed( KEY_S ) Then
+		If IsKeyPressed( ray.lib.KEY_DOWN ) Or IsKeyPressed( ray.lib.KEY_S ) Then
 			return "down"
 		EndIf
 
-		If IsKeyPressed( KEY_LEFT ) Or IsKeyPressed( KEY_A ) Then
+		If IsKeyPressed( ray.lib.KEY_LEFT ) Or IsKeyPressed( ray.lib.KEY_A ) Then
 			return "left"
 		EndIf
 
-		If IsKeyPressed( KEY_RIGHT ) Or IsKeyPressed( KEY_D ) Then
+		If IsKeyPressed( ray.lib.KEY_RIGHT ) Or IsKeyPressed( ray.lib.KEY_D ) Then
 			return "right"
 		EndIf
 		
 	EndMethod
 
 	Method released:string()
-		If IsKeyReleased( KEY_Z ) Or IsKeyReleased( KEY_N ) Then
+		If IsKeyReleased( ray.lib.KEY_Z ) Or IsKeyReleased( ray.lib.KEY_N ) Then
 			return "a"
 		EndIf
 
-		If IsKeyReleased( KEY_x ) Or IsKeyReleased( KEY_M ) Then
+		If IsKeyReleased( ray.lib.KEY_X ) Or IsKeyReleased( ray.lib.KEY_M ) Then
 			return "b"
 		EndIf
 
-		If IsKeyReleased( KEY_UP ) Or IsKeyReleased( KEY_W ) Then
+		If IsKeyReleased( ray.lib.KEY_UP ) Or IsKeyReleased( ray.lib.KEY_W ) Then
 			return "up"
 		EndIf
 
-		If IsKeyReleased( KEY_DOWN ) Or IsKeyReleased( KEY_S ) Then
+		If IsKeyReleased( ray.lib.KEY_DOWN ) Or IsKeyReleased( ray.lib.KEY_S ) Then
 			return "down"
 		EndIf
 
-		If IsKeyReleased( KEY_LEFT ) Or IsKeyReleased( KEY_A ) Then
+		If IsKeyReleased( ray.lib.KEY_LEFT ) Or IsKeyReleased( ray.lib.KEY_A ) Then
 			return "left"
 		EndIf
 
-		If IsKeyReleased( KEY_RIGHT ) Or IsKeyReleased( KEY_D ) Then
+		If IsKeyReleased( ray.lib.KEY_RIGHT ) Or IsKeyReleased( ray.lib.KEY_D ) Then
 			return "right"
 		EndIf
 		

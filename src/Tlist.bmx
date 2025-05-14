@@ -41,11 +41,11 @@ Type TgameList
     ' Update the list (handle input and scrolling)
     Method Update()
         ' Update selected index
-        If IsKeyPressed(KEY_UP) Then
+        If IsKeyPressed(ray.lib.KEY_UP) Then
             selectedIndex = Max(selectedIndex - 1, 0) ' Move selection up
             PlaySound( sounds_Menu_In, Null )
         EndIf
-        If IsKeyPressed(KEY_DOWN) Then
+        If IsKeyPressed(ray.lib.KEY_DOWN) Then
             selectedIndex = Min(selectedIndex + 1, maxItems - 1) ' Move selection down
             PlaySound( sounds_Menu_In, Null )
         EndIf
@@ -56,7 +56,7 @@ Type TgameList
         ElseIf (selectedIndex + 1) * itemHeight > scrollPosition + listHeight Then
             scrollPosition = (selectedIndex + 1) * itemHeight - listHeight
         EndIf
-        If IsKeyPressed( KEY_Z ) Then
+        If IsKeyPressed(ray.lib.KEY_Z) Then
             PlaySound( sounds_Menu_Out, Null )
             LoadLua(items[selectedIndex])
         EndIf

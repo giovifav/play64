@@ -7,6 +7,11 @@ Import brl.maxlua
 Import brl.filesystem
 Import Text.ini
 Import brl.map
+'Import MaxGUI.Drivers
+'Import BRL.EventQueue
+'Import BRL.TextStream
+
+
 Include "src/drawApi.bmx"
 Include "src/inputApi.bmx"
 Include "src/appApi.bmx"
@@ -56,6 +61,7 @@ EndIf
 
 
 While Not WindowShouldClose()  
+
 	  ' Detect window close button or ESC key
 	If IsKeyPressed( KEY_F ) Then
 		ToggleBorderlessWindowed()

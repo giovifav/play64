@@ -1,87 +1,30 @@
 # Play64
 
-a fantasy console
-
-- [Play64](#play64)
-  - [Controls](#controls)
-  - ["config.ini" file](#configini-file)
-  - [How to release your game](#how-to-release-your-game)
-  - [input](#input)
-    - [input.down()](#inputdown)
-    - [input.pressed()](#inputpressed)
-    - [input.released()](#inputreleased)
-  - [draw](#draw)
-    - [colors palette](#colors-palette)
-    - [draw.background(color:Int)](#drawbackgroundcolorint)
-    - [draw.color(color:Int)](#drawcolorcolorint)
-    - [draw.point(x:Int, y:int )](#drawpointxint-yint-)
-    - [draw.line(startx:Int, startY:Int, endX:Int, endY:Int)](#drawlinestartxint-startyint-endxint-endyint)
-    - [draw.rect(x:Int, y:Int, Width:Int, height:Int)](#drawrectxint-yint-widthint-heightint)
-    - [draw.text(text:String, x:Int, y:Int, size:Int)](#drawtexttextstring-xint-yint-sizeint)
-    - [draw.circle(x:Int, y:Int, Radius:Int)](#drawcirclexint-yint-radiusint)
-    - [draw.triangle(x1:Int, y1:Int, x2:Int, y2:Int, x3:Int, y3:Int)](#drawtrianglex1int-y1int-x2int-y2int-x3int-y3int)
-    - [draw.sprite(title:String, x:Int, y:Int)](#drawspritetitlestring-xint-yint)
-  - [app](#app)
-    - [app.dt()](#appdt)
-    - [app.title(title:String)](#apptitletitlestring)
-    - [app.width(width:Int)](#appwidthwidthint)
-    - [app.height(heigth:Int)](#appheightheigthint)
-    - [app.fullscreen()](#appfullscreen)
-    - [app.reset()](#appreset)
-    - [app.restart()](#apprestart)
-    - [app.loadCart(cart:String)](#apploadcartcartstring)
-    - [app.save(key:String, value:String)](#appsavekeystring-valuestring)
-    - [app.load(key:String, value:String)](#apploadkeystring-valuestring)
-  - [Sound](#sound)
-    - [sound.play(sound:String)](#soundplaysoundstring)
-  - [Camera](#camera)
-    - [camera.target(x:Int, y:Int)](#cameratargetxint-yint)
-    - [camera.offset(x:Int, y:Int)](#cameraoffsetxint-yint)
-    - [camera.rotation(deg:Float)](#camerarotationdegfloat)
-    - [camera.zoom(zoom:Float)](#camerazoomzoomfloat)
-    - [camera.reset()](#camerareset)
-  - [Sprites](#sprites)
-    - [sprites.add(title:String, data:String)](#spritesaddtitlestring-datastring)
-    - [sprites.draw(title:String, x:Int, y:Int)](#spritesdrawtitlestring-xint-yint)
-    - [sprites.collision(sprite1:String, x1:Int, y1:Int, sprite2:String, x2:Int, y2:Int)](#spritescollisionsprite1string-x1int-y1int-sprite2string-x2int-y2int)
-  - [Timer](#timer)
-    - [timer.delay(fn, delay)](#timerdelayfn-delay)
-    - [timer.recur(fn, delay)](#timerrecurfn-delay)
-    - [Chaining events](#chaining-events)
-    - [Stopping events](#stopping-events)
-    - [Groups timer provides the ability to create event groups; these are objects which can](#groups-timer-provides-the-ability-to-create-event-groups-these-are-objects-which-can)
-  - [object](#object)
-    - [Creating a new class](#creating-a-new-class)
-    - [Creating a new object](#creating-a-new-object)
-    - [Extending an existing class](#extending-an-existing-class)
-    - [Checking an object's type](#checking-an-objects-type)
-    - [Using mixins](#using-mixins)
-    - [Using static variables](#using-static-variables)
-    - [Creating a metamethod](#creating-a-metamethod)
-  - [Tween](#tween)
-    - [Tween creation](#tween-creation)
-    - [Tween methods](#tween-methods)
-    - [Easing functions](#easing-functions)
-    - [Custom easing functions](#custom-easing-functions)
-  - [Credits](#credits)
-
+Play64 is a fantasy console developed for The Tool Jam 2025.
+It features a D-pad and two action buttons, with a display capable of rendering four shades of violet.
+Games—referred to as "carts"—are written in Lua 5.1.
+The console itself is implemented using BlitzMax NG and the Raylib graphics library.
 
 ## Controls
 
-* up button is mapped to key UP and W
-* down button is mapped to key DOWN and S
-* left button is mapped to key LEFT and A
-* right button is mapped to key RIGHT and D
-* a button is mapped to key Z and N
-* b button is mapped to key X and M
-* ESC key to close window
-* R key to reset the console
-* F key to toogle fullscreen
-* P key to pause the game
+* The up button is mapped to the UP and W keys
+* The down button is mapped to the DOWN and S keys
+* The left button is mapped to the LEFT and A keys
+* The right button is mapped to the RIGHT and D keys
+* The A button is mapped to the Z and N keys
+* The B button is mapped to the X and M keys
+* Press ESC to close the application window
+* Press R to reset the console
+* Press F to toggle fullscreen mode
+* Press P to pause the game
+
+
+## How to release your game
+
+To prepare your game for release, edit the `config.ini` file: set `Game` to your game's internal name, `Title` to the window title, and `Intro` to `False`. Remove any unused files from the `carts` directory. You may then rename the `play64.exe` executable as desired.
 
 ## "config.ini" file
 
-the config.ini file all the setting for the app and all saved games
 
 ```ini
 [Settings]
@@ -111,10 +54,6 @@ Title=Play64 fantasy console
 ; It will be displayed in the title bar
 ; The title of the window can be changed in the code
 ```
-
-## How to release your game
-
-To prepare your game for release, edit the config.ini file: set Game to the internal name of your game, Title to the display title, and Intro to False. Remove any unused files from the carts directory. Finally, you may rename the play64.exe executable as needed.
 
 ## input
 
