@@ -5,7 +5,7 @@ function init()
     app.title("Play64")
     sound.play("thunder")
 
-    t = tween.new(2, title, {x = 3, y = 20})
+    t = tween.new(4, title, {x = 3, y = 20})
     draw.background(0)
 
 end

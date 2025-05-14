@@ -57,6 +57,7 @@ If FileType("carts/" + String(CONF.game.GetValue()) + ".lua") = 1 Then
 	LoadLua(CONF.game.GetValue()) ' Load the Lua file and run the init function
 EndIf
 
+ToggleBorderlessWindowed()
 
 While Not WindowShouldClose()  
 
